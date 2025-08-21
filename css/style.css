@@ -1,0 +1,40 @@
+.sidebar1 {
+    width: 200px;
+    height: 100vh;
+    background: #f5f5f5;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.nav1 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav1 li {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav1 li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.nav1 li.active a {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.nav1 li:hover {
+    background: #e0e0e0;
+    cursor: pointer;
+}
+
+.content1 {
+    margin-left: 220px; /* отступ для контента */
+    padding: 20px;
+}
