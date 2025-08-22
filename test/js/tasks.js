@@ -27,7 +27,23 @@ var taskConfig = {
     
 };
 
+function TaskSetListId(id) {
+    $('#task-listId').val(id);
+    TaskRefreshData();
+}
+
+function TaskGetListId() {
+    return $('#task-listId').val();
+}
+
+
+function TaskGetUrl() {
+    return backend_tasks_for_lists+TaskGetListId();
+}
+
+
 // Функция для загрузки данных
+
 function TasksLoadData(url) {
     $.ajax({
         url: url, // URL вашего API
@@ -42,6 +58,10 @@ function TasksLoadData(url) {
         }
     });
    TaskEditFormLoad(null);
+}
+
+function TaskRefreshData() {
+    TasksLoadData(TaskGetUrl());
 }
 
 function TasksUpdateRow(index, data)

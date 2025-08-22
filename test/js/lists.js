@@ -40,8 +40,8 @@ function ListsOnClick(element)
 {
     var attr= element.attr("ref-id");
     console.log("Нажат " +attr);
-    var url = backend_tasks_for_lists+attr;
-    TasksLoadData(url);
+    TaskSetListId(attr);
+    AddTaskSetTaskListId(attr);
 }
 
 $('.nav1').on('click', 'li', function (e) {

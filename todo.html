@@ -33,8 +33,16 @@
     </div>
     <div class="content1">
        
-        
+        <form id="add-task-form">
+            <div class="form-group">
+                <label for="singleLineInput">Задача:</label>
+                <input type="text" class="form-control" id="add-task-name" name="name" placeholder="Однострочный ввод">
+            </div>
+            <input type="hidden" name="userTaskListId" id="add-task-list-id">
+            <button id="add-task" type="submit" class="btn btn-primary btn-block">+</button>
+        </form>
         <!-- Содержимое вкладок -->
+        <input type="hidden" id="task-listId">
         <table
                 id="dynamic-table"
                 data-toggle="table"
@@ -111,6 +119,7 @@
 <script src="test/js/task_edit_form.js"></script>
 <script src="test/js/ajax_form.js"></script>
 <script src="test/js/add_list.js"></script>
+<script src="test/js/add_task.js"></script>
 <script>
     
     if (window.jQuery) {
