@@ -21,15 +21,19 @@
 </header>
 <main>
     <div class="sidebar1">
-        <ul class="nav1">
-            <li class="active"><a href="#">Главная</a></li>
-            <li><a href="#">Новости</a></li>
-            <li><a href="#">Контакты</a></li>
-            <li><a href="#">О нас</a></li>
-        </ul>
+        <form id="list-add">
+            <div class="form-group">
+                <label for="singleLineInput">Название:</label>
+                <input type="text" class="form-control" id="list-name" name="name" placeholder="Введите название списка">
+            </div>
+            <button id="add-list" type="submit" class="btn btn-primary btn-block">+</button>
+        </form>
+        
+        <ul class="nav1"></ul>
     </div>
-
     <div class="content1">
+       
+        
         <!-- Содержимое вкладок -->
         <table
                 id="dynamic-table"
@@ -56,10 +60,40 @@
             </tr>
             </thead>
         </table>
+        <div id="edit-form">
+            <input type="hidden" name="rowIndex" id="task_rowIndex">
+            <input type="hidden" name="taskId" id="task_Id">
+    
+            <form id="task-form">
+                <div class="form-group">
+                    <label for="singleLineInput">Задача:</label>
+                    <input type="text" class="form-control" id="singleLineInput" name="name" placeholder="Однострочный ввод">
+                </div>
+
+                <div class="form-group">
+                    <label for="multiLineInput">Описание:</label>
+                    <textarea class="form-control" name="description" id="multiLineInput" rows="4" placeholder="Многострочный ввод"></textarea>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input"  name="isCompleted" type="checkbox" id="checkBoxExample">
+                    <label class="form-check-label" for="checkBoxExample">
+                        Выполнено
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload">Загрузить файл</label>
+                    <input type="file" class="form-control-file" id="fileUpload">
+                </div>
+                <input type="hidden" name="userTaskListId" id="editFormTaskListId">
+                <input type="hidden" name="rowId" id="taskRowId">
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
     </div>
+  
 </main>
 <footer>
-    <!-- Подвал сайта -->
 </footer>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"
 ></script>
@@ -73,9 +107,11 @@
 <script src="test/js/references.js"></script>
 <script src="js/script.js"></script>
 <script src="test/js/ajax.js"></script>
-<script src="test/js/table.js"></script>
-<script src="test/js/navigation.js"></script>
-
+<script src="test/js/tasks.js"></script>
+<script src="test/js/lists.js"></script>
+<script src="test/js/task_edit_form.js"></script>
+<script src="test/js/ajax_form.js"></script>
+<script src="test/js/add_list.js"></script>
 <script>
     
     if (window.jQuery) {
@@ -86,6 +122,50 @@
         console.log('jQuery не подключен');
         throw 1;
     }
+    function getBootstrapVersion() {
+        const scripts = document.scripts;
+        for (let i = 0; i < scripts.length; i++) {
+            if (scripts[i].src.includes('bootstrap')) {
+                const src = scripts[i].src;
+                const versionMatch = src.match(/bootstrap@(\d+\.\d+\.\d+)/);
+                if (versionMatch) {
+                    console.log("Версия Bootstrap: " + versionMatch[1]);
+                    return true;
+                }
+            }
+        }
+        console.log("Bootstrap не найден");
+        return false;
+    }
+    if (!getBootstrapVersion())
+        throw 1;
+
+    function checkBootstrapCSSVersion() {
+        const stylesheets = document.styleSheets;
+        for (let i = 0; i < stylesheets.length; i++) {
+            try {
+                const rules = stylesheets[i].cssRules;
+                for (let j = 0; j < rules.length; j++) {
+                    if (rules[j].selectorText === '/*!') {
+                        const versionMatch = rules[j].cssText.match(/Bootstrap v(\d+\.\d+\.\d+)/);
+                        if (versionMatch) {
+                            console.log("Версия Bootstrap CSS: " + versionMatch[1]);
+                            return true;
+                        }
+                    }
+                }
+            } catch (e) {
+                // Некоторые браузеры могут блокировать доступ к CSSRules
+            }
+        }
+        console.log("Bootstrap CSS не найден");
+        return false;
+    }
+
+    if (!checkBootstrapCSSVersion())
+        throw 1;
+
+
 </script>
 </body>
 </html>

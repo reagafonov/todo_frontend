@@ -1,23 +1,23 @@
-var navigation_html = "";
+var lists_html = "";
 
-function navigation_on_success(response) {
+function ListsOnSuccess(response) {
 
-    $.each(response, OnDataElementLoaded)
+    $.each(response, ListsOnDataElementLoaded)
 
-    OnDataLoaded();
+    ListsOnDataLoaded();
 }
 
 
-function OnDataElementLoaded(index, item) {
+function ListsOnDataElementLoaded(index, item) {
     console.log('Загружен ' + item);
     var current = '<li ref-id="' + item.id + '"><a href="#">' + item.name + '</a></li>';
     console.log(current)
-    navigation_html += current
+    lists_html += current
 }
 
-function OnDataLoaded() {
-    console.log("Итого " + navigation_html);
-    $('.nav1').html(navigation_html);
+function ListsOnDataLoaded() {
+    console.log("Итого " + lists_html);
+    $('.nav1').html(lists_html);
 
     const navLinks = document.querySelectorAll('.nav1 li');
 
@@ -36,12 +36,12 @@ function OnDataLoaded() {
     });
 }
 
-function navigation_on_click(element)
+function ListsOnClick(element)
 {
     var attr= element.attr("ref-id");
     console.log("Нажат " +attr);
-    var url = backend_tasks_for_lists+"/"+attr;
-    Table_LoadData(url);
+    var url = backend_tasks_for_lists+attr;
+    TasksLoadData(url);
 }
 
 $('.nav1').on('click', 'li', function (e) {
@@ -56,12 +56,13 @@ $('.nav1').on('click', 'li', function (e) {
     // Координаты клика
     console.log('X: ' + e.pageX + ', Y: ' + e.pageY);
     
-    navigation_on_click(target);
+    ListsOnClick(target);
 });
 
-
-$(function () {
-    ajax_LoadObjectList(backend_lists, "GET", navigation_on_success, function () {
+//загрузка списков
+function ListsLoad()
+{
+    ajax_LoadObjectList(backend_lists, "GET", ListsOnSuccess, function () {
     });
     var target = $('.nav li:first');
 
@@ -70,6 +71,8 @@ $(function () {
     console.log('ID элемента: ' + target.attr('id'));
     console.log('REF-ID элемента: ' + target.attr('ref-id'));
     console.log('Класс элемента: ' + target.attr('class'));
+}
 
-
+$(function () {
+   ListsLoad();
 });
