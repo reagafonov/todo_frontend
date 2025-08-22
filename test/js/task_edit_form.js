@@ -84,6 +84,13 @@ function TasksOnLoaded(response)
     TaskEditFormLoad(GetCurrentId());
 }
 
+function DeleteCurrent()
+{
+    var id = GetCurrentId();
+    var removeUrl = backend_task+id;
+    AjaxSendData(removeUrl,"DELETE",TaskRefreshData,function (){});
+}
+
 $(function() {
     $('#task-form').attr('method', "PUT");
     $('#task-form').on('submit', function(e) {
@@ -97,4 +104,8 @@ $(function() {
             AjaxSendData(backend_task+GetCurrentId()+"/uncomplete", "PATCH", TasksRefreshCurrent, function (){});
         }
     });
+    $('#task-delete').on('click', function() {
+            DeleteCurrent();
+    });
+    
 });
