@@ -35,5 +35,20 @@ function ajax_LoadObjectList(url, method, on_success, on_error) {
          error: on_error
      });
  }
+
+function AjaxSendData(url, method, on_success, on_error) {
+    // Выполняем AJAX-запрос
+    $.ajax({
+        url: url,                   // URL для получения данных
+        method: method,             // Метод запроса
+        contentType: 'application/json',
+        beforeSend: function() {
+            // Опционально: показываем индикатор загрузки
+            //$('#' + containerId).html('<div class="loading">Загрузка...</div>');
+        },
+        success: on_success,
+        error: on_error
+    });
+}
  
  

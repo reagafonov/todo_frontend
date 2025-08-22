@@ -4,23 +4,55 @@ function TaskApplyData(data)
     $('#multiLineInput').val(data.description);
     $('#checkBoxExample').prop('checked',data.isCompleted);
     $('#editFormTaskListId').val(data.userTaskListId);
-    $('#edit-form').removeAttr('style');
-    TasksUpdateRow($('#task_rowIndex').val(),data);
+    TaskShowForm();
+    TasksUpdateRow(GetSelectedIndex(),data);
 }
+
+function GetSelectedIndex()
+{
+    return $('#task_rowIndex').val();
+}
+
+function GetCurrentId()
+{
+    return $('#taskRowId').val();
+}
+
+function SetCurrentId(id)
+{
+    $('#taskRowId').val(id);
+}
+
 
 function TaskSetId(id)
 {
-    $('#taskRowId').val(id);
+    SetCurrentId(id);
     TaskEditFormLoad(id);
 }
+
+function TaskHideForm()
+{
+    $('#edit-form').attr('style', 'visibility:hidden');
+}
+
+function TaskShowForm()
+{
+    $('#edit-form').removeAttr('style');
+}
+
+function TasksRefreshCurrent(tmp)
+{
+    TaskEditFormLoad(GetCurrentId());
+}
+
 
 function TaskEditFormLoad(id)
 {
     if (id == null) {
-        $('#edit-form').attr('style', 'visibility:hidden');
+        TaskHideForm();
         return;
     }
-    $('#task_Id').val(id);
+    SetCurrentId(id);
     var url = backend_task + id;
     
     ajax_LoadObjectList(url, "GET", TaskApplyData, function () {});
@@ -44,10 +76,12 @@ function TasksFormToJson(form) {
     return obj;
 }
 
+
+
 function TasksOnLoaded(response)
 {
     response = FixData(response);
-    TaskEditFormLoad($('#taskRowId').val())
+    TaskEditFormLoad(GetCurrentId());
 }
 
 $(function() {
@@ -56,5 +90,11 @@ $(function() {
         e.preventDefault(); // предотвращаем стандартную отправку
        AjaxFormSend($(this),$('#task-form').attr("action"),$('#task-form').attr("method"),TasksOnLoaded, FixData)
     });
-
+    $('#checkBoxExample').on('change', function() {
+        if ($(this).is(':checked')) {
+           AjaxSendData(backend_task+GetCurrentId()+"/complete", "PATCH", TasksRefreshCurrent, function (){alert("err")});
+        } else {
+            AjaxSendData(backend_task+GetCurrentId()+"/uncomplete", "PATCH", TasksRefreshCurrent, function (){});
+        }
+    });
 });
