@@ -64,26 +64,86 @@ function TaskRefreshData() {
     TasksLoadData(TaskGetUrl());
 }
 
+function GetCurrentRow()
+{
+    return $('#dynamic-table tr').eq(GetSelectedIndex());
+}
+
+
+
 function TasksUpdateRow(index, data)
 {
-    $('#dynamic-table').bootstrapTable('updateRow', {
-        index: index-1,
-        row: data,
-        success: function(row, $element) {
-            // Добавляем класс при успешном обновлении
-            $element.addClass('table-primary');
+    let $row = $('#dynamic-table tr[data-index="' + (index - 1)+ '"]');
+    let $cells = $row.find("td");
+    $('#dynamic-table thead tr th').each(function (index) { 
+        var val = data[$(this).attr('data-field')];
+        if (val !== undefined && val !== null) {
+            $cells.eq(index).text(val);
+        }
+        else
+        {
+            $cells.eq(index).text('-');
         }
     });
-    
+
+}
+
+function TaskDeselectMultiselected()
+{
+    $('.selected-task').removeClass('selected-task');
+    SetMultiselectedIds([]);
+}
+
+function TaskDeselectSelected()
+{
+   $('.table-primary').removeClass('table-primary');    
+}
+
+function SetMultiselect(enabled)
+{
+    $('input[name="task-multiselect"]').removeAttr('checked');
+    if (enabled)
+        $('input[name="task-multiselect"][value="true"]').attr('checked','');
+    else 
+        $('input[name="task-multiselect"][value="false"]').attr('checked','');
+    if (enabled) {
+        TaskDeselectSelected();
+        DeleteManyShow();
+    }
+    else {
+        TaskDeselectMultiselected();
+        DeleteManyHide();
+    }
+}
+
+function GetMultiselect()
+{
+    return $('input[name="task-multiselect"]:checked').val() == 'true';
+}
+
+function GetMultiselectedIds()
+{
+    var data = $('#task_Ids').val();
+    if (data == undefined || data == null ||  data == "" )
+        return [];
+    return JSON.parse(data);
+}
+
+function SetMultiselectedIds(data)
+{
+    var data = JSON.stringify(data);
+    $('#task_Ids').val(data);
 }
 
 $(document).ready(function() {
     // Функция для инициализации таблицы
     function TasksInitTable() {
         $('#dynamic-table').bootstrapTable(taskConfig);
-       
+       SetMultiselect(false);
     }
 
+    SetMultiselect(false);
+    
     // Инициализируем таблицу при загрузке страницы
     TasksInitTable();
 
@@ -97,11 +157,51 @@ $(document).ready(function() {
         console.dir($element);
         var rowIndex = $element[0].rowIndex;
         console.log(rowIndex);
-        TaskSetId(row.id);
+        
+        var id = row.id;
         $('#task_rowIndex').val(rowIndex);
-        $('#task_Id').val(row.Id);
-        $('.table-primary').removeClass('table-primary'); // убираем выделение
-        $element.addClass('table-primary');         // выделяем текущую строку
+        $('#task_Id').val(id);
+        
+        if (GetMultiselect())
+        {
+            $element.toggleClass('selected-task');
+            var isSet  = $element.hasClass('selected-task');
+            var ids = GetMultiselectedIds();
+            
+            if (isSet) {
+                if (!ids.includes(id)) 
+                {
+                    ids.push(id);
+                }
+            }
+            else if (ids.includes(id))
+            {
+                for (var i = 0; i < ids.length; i++) {
+                    if (ids[i] == id) {
+                        ids.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+            SetMultiselectedIds(ids);
+        }
+        else
+        {
+            $('.table-primary').removeClass('table-primary'); // убираем выделение
+            $element.addClass('table-primary');         // выделяем текущую строку
+            TaskSetId(row.id);
+        }
     });
-   
+
+    $('input[name="task-multiselect"]').change(function() {
+        var value = $('input[name="task-multiselect"]:checked').val();
+        if (value == 'true') {
+            SetMultiselect(true);
+            TaskSetId(null);
+        }
+        else {
+            SetMultiselect(false);
+        }
+    });
+    
 });

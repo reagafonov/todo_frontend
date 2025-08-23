@@ -50,5 +50,21 @@ function AjaxSendData(url, method, on_success, on_error) {
         error: on_error
     });
 }
- 
+
+
+function AjaxSendInnerData(url, method, on_success, on_error, data) {
+    // Выполняем AJAX-запрос
+    $.ajax({
+        url: url,                   // URL для получения данных
+        method: method,             // Метод запроса
+        data: data,
+        contentType: 'application/json',
+        beforeSend: function() {
+            // Опционально: показываем индикатор загрузки
+            //$('#' + containerId).html('<div class="loading">Загрузка...</div>');
+        },
+        success: on_success,
+        error: on_error
+    });
+}
  

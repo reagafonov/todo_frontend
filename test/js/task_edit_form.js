@@ -5,6 +5,21 @@ function TaskApplyData(data)
     $('#checkBoxExample').prop('checked',data.isCompleted);
     $('#editFormTaskListId').val(data.userTaskListId);
     TaskShowForm();
+}
+
+function TaskEditSetMultiselect(val)
+{
+    $('#tasks-multiselect').val(val);
+}
+
+function TaskEditGetMultiselect()
+{
+    return $('#tasks-multiselect').val();
+}
+
+function OnDataLoaded(data)
+{
+    TaskApplyData(data);
     TasksUpdateRow(GetSelectedIndex(),data);
 }
 
@@ -32,7 +47,7 @@ function TaskSetId(id)
 
 function TaskHideForm()
 {
-    $('#edit-form').attr('style', 'visibility:hidden');
+    $('#edit-form').attr('style', 'display:none');
 }
 
 function TaskShowForm()
@@ -55,7 +70,7 @@ function TaskEditFormLoad(id)
     SetCurrentId(id);
     var url = backend_task + id;
     
-    ajax_LoadObjectList(url, "GET", TaskApplyData, function () {});
+    ajax_LoadObjectList(url, "GET", OnDataLoaded, function () {});
 }
 
 function FixData(data)
@@ -107,5 +122,7 @@ $(function() {
     $('#task-delete').on('click', function() {
             DeleteCurrent();
     });
+
+  
     
 });

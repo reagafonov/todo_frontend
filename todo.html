@@ -8,6 +8,7 @@
     <meta name="description" content="Краткое описание сайта">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/color-design.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -43,6 +44,15 @@
         </form>
         <!-- Содержимое вкладок -->
         <input type="hidden" id="task-listId">
+        
+        <div class="radio-group">
+            <input type="radio" id="task-multiselect-on" name="task-multiselect" value="false" checked>
+            <label for="task-multiselect-on">Одиночный выбор</label>
+
+            <input type="radio" id="task-multiselect-off" name="task-multiselect"  value="true">
+            <label for="task-multiselect-off">Множественный выбор</label>
+
+        </div>
         <table
                 id="dynamic-table"
                 data-toggle="table"
@@ -67,10 +77,12 @@
             </tr>
             </thead>
         </table>
+        
         <div id="edit-form">
             <input type="hidden" name="rowIndex" id="task_rowIndex">
             <input type="hidden" name="taskId" id="task_Id">
-    
+            <input type="hidden" name="taskIds" id="task_Ids">
+            <input type="hidden" id="tasks-multiselect">
             <form id="task-form">
                 <div class="form-group">
                     <label for="singleLineInput">Задача:</label>
@@ -110,9 +122,12 @@
                 <input type="hidden" name="userTaskListId" id="editFormTaskListId">
                 <input type="hidden" name="rowId" id="taskRowId">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
+                
             </form>
-            <button type="button" class="btn btn-primary" id="task-delete">Удалить</button>
+            <button type="button" class="btn btn-primary" id="task-delete" >Удалить</button>
+           
         </div>
+        <button type="button" class="btn btn-primary" id="task-delete-many" style="visibility: hidden">Удалить</button>
     </div>
   
 </main>
@@ -136,6 +151,7 @@
 <script src="test/js/ajax_form.js"></script>
 <script src="test/js/add_list.js"></script>
 <script src="test/js/add_task.js"></script>
+<script src="test/js/delete-many.js"></script>
 <script>
     
     if (window.jQuery) {
