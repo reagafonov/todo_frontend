@@ -38,6 +38,8 @@ function TaskGetListId() {
 
 
 function TaskGetUrl() {
+    if (ShowRemovedOnly)
+        return backend_tasks_for_lists+TaskGetListId()+"/deleted";
     return backend_tasks_for_lists+TaskGetListId();
 }
 

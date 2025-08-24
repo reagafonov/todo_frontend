@@ -22,8 +22,6 @@
 
 function AjaxFormSend(form, url, method, OnResponse, FixData)
 {
-   
-    
     var obj = TasksFormToJson(form);
     if (FixData != undefined)
         obj = FixData(obj);

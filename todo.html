@@ -44,7 +44,12 @@
         </form>
         <!-- Содержимое вкладок -->
         <input type="hidden" id="task-listId">
-        
+        <div class="form-check">
+            <input class="task-check-input"  name="taskUndelete" type="checkbox" id="task-undelete">
+            <label class="form-check-label" for="checkBoxExample">
+               Восстановление
+            </label>
+        </div>
         <div class="radio-group">
             <input type="radio" id="task-multiselect-on" name="task-multiselect" value="false" checked>
             <label for="task-multiselect-on">Одиночный выбор</label>
@@ -128,6 +133,7 @@
            
         </div>
         <button type="button" class="btn btn-primary" id="task-delete-many" style="visibility: hidden">Удалить</button>
+        <button type="button" class="btn btn-primary" id="task-restore" style="visibility: hidden">Восстановить</button>
     </div>
   
 </main>
@@ -152,6 +158,8 @@
 <script src="test/js/add_list.js"></script>
 <script src="test/js/add_task.js"></script>
 <script src="test/js/delete-many.js"></script>
+<script src="test/js/restore.js"></script>
+<script src="test/js/globals.js"></script>
 <script>
     
     if (window.jQuery) {
