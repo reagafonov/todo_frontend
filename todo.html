@@ -120,16 +120,44 @@
                     <label for="edit-priority-undefined">Не определен</label>
                 </div>
                 
-                <div class="form-group">
-                    <label for="fileUpload">Загрузить файл</label>
-                    <input type="file" class="form-control-file" id="fileUpload">
-                </div>
+              
                 <input type="hidden" name="userTaskListId" id="editFormTaskListId">
                 <input type="hidden" name="rowId" id="taskRowId">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
                 
             </form>
             <button type="button" class="btn btn-primary" id="task-delete" >Удалить</button>
+            <input type="hidden" name="rowIndex" id="file_rowIndex">
+            <input type="hidden" name="fileId" id="file_Id">
+            <input type="hidden" name="file_taskId" id="file_taskId">
+            <table
+                    id="file-table"
+                    data-toggle="table"
+            >
+                <thead>
+                <tr>
+                    <th data-field="name">
+                        Название
+                    </th>
+                    <th data-field="created">
+                        Дата создания
+                    </th>
+                </tr>
+                </thead>
+            </table>
+            <form id="task-file-upload" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file-name">Название:</label>
+                    <input type="text" class="form-control" id="file-name" name="name" placeholder="Введите название файла">
+                </div>
+                <div class="form-group">
+                    <label for="fileUpload">Загрузить файл</label>
+                    <input type="file" class="form-control-file" id="fileUpload">
+                </div>
+                <button type="submit" class="btn btn-primary">Загрузить</button>
+                
+            </form>
+            <button type="button" class="btn btn-primary" id="file-delete" >Удалить</button>
            
         </div>
         <button type="button" class="btn btn-primary" id="task-delete-many" style="visibility: hidden">Удалить</button>
@@ -160,6 +188,8 @@
 <script src="test/js/delete-many.js"></script>
 <script src="test/js/restore.js"></script>
 <script src="test/js/globals.js"></script>
+<script src="test/js/file-table.js"></script>
+<script src="test/js/file-edit.js"></script>
 <script>
     
     if (window.jQuery) {

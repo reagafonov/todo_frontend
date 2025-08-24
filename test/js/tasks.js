@@ -192,6 +192,7 @@ $(document).ready(function() {
             $('.table-primary').removeClass('table-primary'); // убираем выделение
             $element.addClass('table-primary');         // выделяем текущую строку
             TaskSetId(row.id);
+            LoadFiles(row.id);
         }
     });
 

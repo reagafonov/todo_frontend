@@ -42,3 +42,20 @@ function AjaxFormSend(form, url, method, OnResponse, FixData)
         }
     });
 }
+
+function AjaxFormSendFiles(form, url, method, OnResponse)
+{
+    
+    $.ajax({
+        url: url, // URL для отправки
+        type: method,
+        data: form,
+        success: function(response) {
+            console.log('Успешно:', response);
+            OnResponse(response);
+        },
+        error: function(error) {
+            console.error('Ошибка:', error);
+        }
+    });
+}
