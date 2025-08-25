@@ -40,7 +40,8 @@ function ListsOnClick(element)
 {
     var attr= element.attr("ref-id");
     console.log("Нажат " +attr);
-    TaskSetListId(attr);
+    //TaskSetListId(attr);
+    state.changedListId(attr);
     AddTaskSetTaskListId(attr);
 }
 

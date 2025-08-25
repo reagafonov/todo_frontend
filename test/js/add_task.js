@@ -8,8 +8,8 @@ $(function () {
     $('#add-task-form').attr('action', backend_task);
     $('#add-task-form').on('submit', function(e) {
         e.preventDefault(); // предотвращаем стандартную отправку
-        AjaxFormSend($(this),backend_task,"POST",TaskRefreshData);
-        TaskRefreshData();
+        AjaxFormSend($(this),backend_task,"POST",function () {state.changedListId(state.selectedListId);});
+        //TaskRefreshData();
         $('#add-task-name').val('');
     });
 })

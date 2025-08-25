@@ -50,7 +50,7 @@
                Восстановление
             </label>
         </div>
-        <div class="radio-group">
+        <div class="radio-group" id="multiselect-radio">
             <input type="radio" id="task-multiselect-on" name="task-multiselect" value="false" checked>
             <label for="task-multiselect-on">Одиночный выбор</label>
 
@@ -59,8 +59,7 @@
 
         </div>
         <table
-                id="dynamic-table"
-                data-toggle="table"
+                id="task-table"
         >
             <thead>
             <tr>
@@ -88,17 +87,17 @@
             <input type="hidden" name="taskId" id="task_Id">
             <input type="hidden" name="taskIds" id="task_Ids">
             <input type="hidden" id="tasks-multiselect">
+            
             <form id="task-form">
-                <div class="form-group">
-                    <label for="singleLineInput">Задача:</label>
-                    <input type="text" class="form-control" id="singleLineInput" name="name" placeholder="Однострочный ввод">
-                </div>
-
-                <div class="form-group">
-                    <label for="multiLineInput">Описание:</label>
-                    <textarea class="form-control" name="description" id="multiLineInput" rows="4" placeholder="Многострочный ввод"></textarea>
-                </div>
-
+            
+                    <div class="form-group">
+                        <label for="singleLineInput">Задача:</label>
+                        <input type="text" class="form-control" id="singleLineInput" name="name" placeholder="Однострочный ввод">
+                    </div>
+                    <div class="form-group">
+                        <label for="multiLineInput">Описание:</label>
+                        <textarea class="form-control" name="description" id="multiLineInput" rows="4" placeholder="Многострочный ввод"></textarea>
+                    </div>
                 <div class="form-check">
                     <input class="form-check-input"  name="isCompleted" type="checkbox" id="checkBoxExample">
                     <label class="form-check-label" for="checkBoxExample">
@@ -126,6 +125,7 @@
                 <button type="submit" class="btn btn-primary">Сохранить</button>
                 
             </form>
+            
             <button type="button" class="btn btn-primary" id="task-delete" >Удалить</button>
             <input type="hidden" name="rowIndex" id="file_rowIndex">
             <input type="hidden" name="fileId" id="file_Id">
@@ -146,10 +146,6 @@
                 </thead>
             </table>
             <form id="task-file-upload" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="file-name">Название:</label>
-                    <input type="text" class="form-control" id="file-name" name="name" placeholder="Введите название файла">
-                </div>
                 <div class="form-group">
                     <label for="fileUpload">Загрузить файл</label>
                     <input type="file" class="form-control-file" id="fileUpload">
@@ -176,8 +172,13 @@
 <!--        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM="-->
 <!--        crossorigin="anonymous"></script>-->
 
-<script src="test/js/references.js"></script>
 <script src="js/script.js"></script>
+
+<script src="test/js/bus.js"></script>
+<script src="test/js/start.js"></script>
+
+<script src="test/js/references.js"></script>
+
 <script src="test/js/ajax.js"></script>
 <script src="test/js/tasks.js"></script>
 <script src="test/js/lists.js"></script>
@@ -187,9 +188,8 @@
 <script src="test/js/add_task.js"></script>
 <script src="test/js/delete-many.js"></script>
 <script src="test/js/restore.js"></script>
-<script src="test/js/globals.js"></script>
 <script src="test/js/file-table.js"></script>
-<script src="test/js/file-edit.js"></script>
+<script src="test/js/file-load.js"></script>
 <script>
     
     if (window.jQuery) {

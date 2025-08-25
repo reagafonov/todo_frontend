@@ -22,7 +22,12 @@
 
 function AjaxFormSend(form, url, method, OnResponse, FixData)
 {
-    var obj = TasksFormToJson(form);
+    const f = form.serializeArray();
+    var obj = {};
+    for (let i = 0; i < f.length; i++) {
+        obj[f[i].name] = f[i].value;
+    }
+
     if (FixData != undefined)
         obj = FixData(obj);
     console.dir(obj);
