@@ -53,9 +53,10 @@ function FileLoad(baseUrl) {
                     console.error("Ошибка загрузки:", xhr.responseText);
                 }
             });
+            $('#fileUpload').val('');
         });
 
-        $('#task-file-upload').attr('method', "POST");
+       
     };
     
     this.init();

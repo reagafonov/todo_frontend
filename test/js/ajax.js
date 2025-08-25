@@ -67,4 +67,20 @@ function AjaxSendInnerData(url, method, on_success, on_error, data) {
         error: on_error
     });
 }
+
+function AjaxDelete(url, OnResponse)
+{
+
+    $.ajax({
+        url: url, // URL для отправки
+        type: 'DELETE',
+        success: function(response) {
+            console.log('Успешно:', response);
+            OnResponse(response);
+        },
+        error: function(error) {
+            console.error('Ошибка:', error);
+        }
+    });
+}
  

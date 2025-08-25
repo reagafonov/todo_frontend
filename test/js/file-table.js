@@ -51,6 +51,7 @@ function FileTable(baseUrl) {
         }
         table.show();
         table.loadFromUrl(table.getUrl(id));
+        state.changedFileId(null);
     }
     
     this.init = function () {

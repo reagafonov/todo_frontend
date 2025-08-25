@@ -11,17 +11,18 @@ function FileDelete(baseUrl, button) {
     this.load = function (id, fileDelete) { 
         if (id == null)
         {
-            buttonDelete.hide();
+            fileDelete.hide();
             return;
         }
-        buttonDelete.show();
-        buttonDelete.id = id;
+        fileDelete.show();
     }
     
     this.init = function () {
         button.on('click', function(e) {
-            var url = baseUrl+this.id;
-            ajax_LoadObjectList(url, 'DELETE', state.changedTaskId(this.id), function (){});
+            var url = baseUrl+state.selectedFileId;
+            var adapter = new HandlerAdapter(this.onDeleted, this);
+            AjaxDelete(url, function (response) {state.changedTaskId(state.selectedTaskId);});
+            
         })
     };
     
@@ -30,7 +31,7 @@ function FileDelete(baseUrl, button) {
 }
 
 $(function () {
-    var deleteButton = new FileDelete(backend_files,$('#file-delete'));
+    var deleteButton = new FileDelete(backend_files,$('#task-file-delete'));
     
     var adapter = new HandlerAdapter(deleteButton.load, deleteButton);
     state.subscribe_changedFileId(adapter.adapted);
