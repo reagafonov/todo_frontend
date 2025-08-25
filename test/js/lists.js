@@ -7,6 +7,10 @@ function ListsOnSuccess(response) {
     ListsOnDataLoaded();
 }
 
+function ChangeName(id,name)
+{
+    $('li[ref-id="'+id+'"] a').text(name);
+}
 
 function ListsOnDataElementLoaded(index, item) {
     console.log('Загружен ' + item);
@@ -76,4 +80,5 @@ function ListsLoad()
 
 $(function () {
    ListsLoad();
+   
 });

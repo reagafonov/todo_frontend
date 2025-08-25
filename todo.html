@@ -29,6 +29,14 @@
             </div>
             <button id="add-list" type="submit" class="btn btn-primary btn-block">+</button>
         </form>
+
+        <form id="list-edit">
+            <div class="form-group">
+                <label for="edit-list-name">Название:</label>
+                <input type="text" class="form-control" id="edit-list-name" name="name" placeholder="Введите название списка">
+            </div>
+            <button id="edit-list" type="submit" class="btn btn-primary btn-block">Сохранить</button>
+        </form>
         
         <ul class="nav1"></ul>
     </div>
@@ -191,6 +199,7 @@
 <script src="test/js/file-table.js"></script>
 <script src="test/js/file-load.js"></script>
 <script src="test/js/file-delete.js"></script>
+<script src="test/js/list-edit.js"></script>
 <script>
     
     if (window.jQuery) {
