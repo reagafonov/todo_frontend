@@ -1,7 +1,7 @@
 var lists_html = "";
 
 function ListsOnSuccess(response) {
-
+    lists_html = "";
     $.each(response, ListsOnDataElementLoaded)
 
     ListsOnDataLoaded();

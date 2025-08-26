@@ -89,6 +89,8 @@ function TasksTable(baseUrl, table) {
     }
 
     this.refresh = function () {
+        if (state.selectedTaskId == null)
+            return;
         this.loadUrl(this.getUrl());
     }
 
