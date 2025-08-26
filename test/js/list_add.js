@@ -1,6 +1,7 @@
 function ListsOnLoaded(response)
 {
     ListsLoad();
+    $('#list-name').val('');
 }
 
 $(function() {
