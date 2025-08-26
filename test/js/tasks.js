@@ -72,6 +72,9 @@ function TasksTable(baseUrl, table) {
 
     this.loadUrl = function (url) {
         var object = this;
+        var textSearch = $('#text-search').val();
+        if (textSearch != null && textSearch != '') 
+            url = url+"?textSearch="+encodeURIComponent(textSearch);
         $.ajax({
             url: url, // URL вашего API
             method: 'GET',
@@ -181,6 +184,10 @@ function TasksTable(baseUrl, table) {
                 object.deselectMultiselect();
             }
         });
+        
+        $('#search-button').on('click', function () {
+            object.refresh();
+        })
     }
     
     this.init();

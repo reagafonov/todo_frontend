@@ -59,7 +59,11 @@
         <ul class="nav1"></ul>
     </div>
     <div class="content1">
-       
+        <div class="form-group">
+            <label for="text-search">Поиск:</label>
+            <input type="text" class="form-control" id="text-search" name="name" placeholder="Строка поиска">
+        </div>
+        <button id="search-button">Применить</button>
         <form id="add-task-form">
             <div class="form-group">
                 <label for="singleLineInput">Задача:</label>
@@ -84,9 +88,7 @@
             <label for="task-multiselect-off">Множественный выбор</label>
 
         </div>
-        <table
-                id="task-table"
-        >
+        <table id="task-table">
             <thead>
             <tr>
                 <th data-field="name">
