@@ -28,6 +28,8 @@ function ListEdit(form,baseUrl,name)
     
     this.dataLoaded = function(data,f){
         f.name.val(data.name);
+        $('input[name="orderType"][value="'+data.orderType+'"]').prop('checked',true);
+        $('input[name="orderDirection"][value="'+data.orderDirection+'"]').prop('checked',true);
         ChangeName(state.selectedListId, data.name);
     }
     
@@ -50,6 +52,7 @@ function ListEdit(form,baseUrl,name)
         form.on('submit', function (e) {
             e.preventDefault();
             object.saveData();
+            state.changedListId(state.selectedListId);
         })
         this.hide();
     }

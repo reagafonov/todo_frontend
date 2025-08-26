@@ -35,6 +35,24 @@
                 <label for="edit-list-name">Название:</label>
                 <input type="text" class="form-control" id="edit-list-name" name="name" placeholder="Введите название списка">
             </div>
+            <div class="radio-group" id="order-radio">
+                <input type="radio" id="order-undefined" name="orderType" value="0">
+                <label for="order-undefined">Не определен</label>
+                <input type="radio" id="order-priority" name="orderType" value="1">
+                <label for="order-priority">По приоритету</label>
+                <input type="radio" id="order-created" name="orderType" value="2">
+                <label for="order-created">По дате создания</label>
+                <input type="radio" id="order-completed" name="orderType" value="3">
+                <label for="order-completed">Не дате завершения</label>
+                <input type="radio" id="order-alphabet" name="orderType" value="4">
+                <label for="order-alphabet">По алфавиту</label>
+            </div>
+            <div class="radio-group" id="direction-radio">
+                <input type="radio" id="direction-ascending" name="orderDirection" value="0" checked>
+                <label for="direction-ascending">По возрастанию</label>
+                <input type="radio" id="direction-descending" name="orderDirection" value="1">
+                <label for="direction-descending">По убыванию</label>
+            </div>
             <button id="edit-list" type="submit" class="btn btn-primary btn-block">Сохранить</button>
         </form>
         
